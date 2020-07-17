@@ -1,0 +1,8 @@
+name: 'AWS Cloudformation Deploy Action'
+description: 'Deploy AWS Cloudformation Stack'
+branding:
+  icon: 'upload-cloud'
+  color: 'blue'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
