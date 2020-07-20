@@ -18,14 +18,21 @@ jobs:
     - uses: actions/checkout@v1
     - uses: university-of-york/aws-cfn-deploy-action@v1.0
       env:
-        TEMPLATE: 'template.yaml'
-        AWS_STACK_NAME: prod-${{ github.actor }}-resourceful
-        AWS_REGION: 'us-east-1'
+        TEMPLATE: 'cloudformation/template.yaml'
+        PARAMETER_FILE: 'cloudformation/configs/config-production.json'
+        AWS_STACK_NAME: 'my-stack-name'
+        AWS_REGION: 'eu-west-1'
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        ROLE_ARN: 'arn:aws:iam::012345678912:role/DeploymentRole'
 ```
 
 ## Parameter Config File
+
+A JSON based parameter file can be used to cleanly translate parameters to the Cloudformation `Key1=Value1 Key2=Value2` format. 
+
+Create a JSON file, structured without a trailing comma with the Key and Value of each parameter you wish to pass, referencing the relative path to this file in the action using *PARAMETER_FILE*.
+
 ```json
 {
     "Bucket" : "my-test-bucket",
