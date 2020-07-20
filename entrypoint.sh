@@ -72,5 +72,5 @@ echo "[default]
 output = text
 region = $AWS_REGION" > ~/.aws/config
 
-array=(aws cloudformation deploy --stack-name $AWS_STACK_NAME --template-file $TEMPLATE $PARAMETER_FILE $CAPABILITIES $ROLE_ARN $FORCE_UPLOAD --no-fail-on-empty-changeset)
+array=(aws cloudformation deploy --stack-name $AWS_STACK_NAME --template-file $TEMPLATE $PARAMETER_OVERRIDES $CAPABILITIES $ROLE_ARN $FORCE_UPLOAD --no-fail-on-empty-changeset)
 eval $(echo ${array[@]})
