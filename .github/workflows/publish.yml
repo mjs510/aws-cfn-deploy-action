@@ -66,10 +66,10 @@ jobs:
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
 
-          if (echo "${{ github.ref }}" | grep -Eq '^refs/tags/v?([0-9]+)\.([0-9]+)\.([0-9]+)$'); then
-            TAGS=$(echo "${{ github.ref }}" | sed -e "s/refs\/tags\///g" | sed -E "s/v?([0-9]+)\.([0-9]+)\.([0-9]+)$/\1.\2.\3 \1.\2 \1/g")
-          elif (echo "${{ github.ref }}" | grep -Eq '^refs/tags/v?([0-9]+)\.([0-9]+)$'); then
-            TAGS=$(echo "${{ github.ref }}" | sed -e "s/refs\/tags\///g" | sed -E "s/v?([0-9]+)\.([0-9]+)$/\1.\2 \1/g")
+          if (echo "${VERSION}" | grep -Eq '^([0-9]+)\.([0-9]+)\.([0-9]+)$'); then
+            TAGS=$(echo "${VERSION}" | sed -E "s/([0-9]+)\.([0-9]+)\.([0-9]+)$/\1.\2.\3 \1.\2 \1/g")
+          elif (echo "${VERSION}" | grep -Eq '^([0-9]+)\.([0-9]+)$'); then
+            TAGS=$(echo "${VERSION}" | sed -E "s/([0-9]+)\.([0-9]+)$/\1.\2 \1/g")
           else
             TAGS="${VERSION}"
           fi
