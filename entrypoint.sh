@@ -55,7 +55,7 @@ if [[ ! -z "$ROLE_ARN" ]]; then
   ROLE_ARN="--role-arn $ROLE_ARN"
 fi
 
-mkdir ~/.aws
+mkdir -p ~/.aws
 touch ~/.aws/credentials
 touch ~/.aws/config
 
