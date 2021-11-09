@@ -55,6 +55,10 @@ if [[ ! -z "$ROLE_ARN" ]]; then
   ROLE_ARN="--role-arn $ROLE_ARN"
 fi
 
+if [[ -n "$AWS_DEPLOY_BUCKET" ]]; then
+    DEPLOY_BUCKET="--s3-bucket $AWS_DEPLOY_BUCKET"
+fi
+
 mkdir -p ~/.aws
 touch ~/.aws/credentials
 touch ~/.aws/config
@@ -68,5 +72,5 @@ echo "[default]
 output = text
 region = $AWS_REGION" > ~/.aws/config
 
-array=(aws cloudformation deploy --stack-name $AWS_STACK_NAME --template-file $TEMPLATE $PARAMETER_OVERRIDES $CAPABILITIES $ROLE_ARN $FORCE_UPLOAD $TAGS --no-fail-on-empty-changeset)
+array=(aws cloudformation deploy --stack-name $AWS_STACK_NAME --template-file $TEMPLATE $PARAMETER_OVERRIDES $CAPABILITIES $ROLE_ARN $FORCE_UPLOAD $TAGS $AWS_DEPLOY_BUCKET --no-fail-on-empty-changeset)
 eval $(echo ${array[@]})
