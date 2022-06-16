@@ -6,25 +6,25 @@ This action deploys AWS Cloudformation Stacks through yaml files.
 
 ```yml
 name: "Deploy Cloudformation Stack to Production"
-on: 
- push:
+on:
+  push:
     branches:
-    - master
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: university-of-york/aws-cfn-deploy-action@v1.0
-      env:
-        TEMPLATE: 'cloudformation/template.yaml'
-        PARAMETER_FILE: 'cloudformation/configs/config-production.json'
-        AWS_STACK_NAME: 'my-stack-name'
-        AWS_REGION: 'eu-west-1'
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        ROLE_ARN: 'arn:aws:iam::012345678912:role/DeploymentRole'
+      - uses: actions/checkout@v1
+      - uses: university-of-york/aws-cfn-deploy-action@v1.0
+        env:
+          TEMPLATE: "cloudformation/template.yaml"
+          PARAMETER_FILE: "cloudformation/configs/config-production.json"
+          AWS_STACK_NAME: "my-stack-name"
+          AWS_REGION: "eu-west-1"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          ROLE_ARN: "arn:aws:iam::012345678912:role/DeploymentRole"
 ```
 
 ## Parameter Config File
