@@ -72,5 +72,16 @@ echo "[default]
 output = text
 region = $AWS_REGION" > ~/.aws/config
 
+if [[ $PACKAGE_ARTIFACTS == true ]]; then
+    if [[ -z "$DEPLOY_BUCKET" ]]; then
+        echo "S3 bucket must be specified when packaging"
+        exit 1
+    fi
+    output_template='packaged-template.yaml'
+    package_cmd=(aws cloudformation package --template-file "$TEMPLATE" "$DEPLOY_BUCKET" --output-template-file "$output_template")
+    eval $(echo ${package_cmd[@]})
+    TEMPLATE=$output_template
+fi
+
 array=(aws cloudformation deploy --stack-name $AWS_STACK_NAME --template-file $TEMPLATE $PARAMETER_OVERRIDES $CAPABILITIES $ROLE_ARN $FORCE_UPLOAD $TAGS $DEPLOY_BUCKET --no-fail-on-empty-changeset)
 eval $(echo ${array[@]})
