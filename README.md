@@ -71,7 +71,10 @@ Create a JSON file, structured without a trailing comma with the Key and Value o
   * Syntax: `Environment=prod` `Name=infrastructure`
 * `ROLE_ARN` - [Optional]. The full role ARN to use for the deploy step
   * Type: `string`
-  
+* `PACKAGE_ARTIFACTS` - [Optional]. Whether to call `aws cloudformation package` on the template to package any local artifacts that it references.
+  * Type: `boolean`
+  * Default: `false`
+
 ### License
 
 The Dockerfile and associated scripts and documentation in this project are released under the [MIT License](LICENSE).
