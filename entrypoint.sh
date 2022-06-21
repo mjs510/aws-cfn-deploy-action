@@ -74,7 +74,7 @@ region = $AWS_REGION" > ~/.aws/config
 
 if [[ $PACKAGE_ARTIFACTS == true ]]; then
     if [[ -z "$DEPLOY_BUCKET" ]]; then
-        echo "S3 bucket must be specified when packaging"
+        echo "You must specify an S3 bucket when when packaging artifacts"
         exit 1
     fi
     output_template='packaged-template.yaml'
